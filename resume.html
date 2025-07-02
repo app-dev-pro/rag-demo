@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yap Sing Loon - Senior AI Engineer Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .title {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .portfolio-highlight {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Portfolio CTA Styles */
+        .portfolio-cta {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .portfolio-badge {
+            background: linear-gradient(145deg, #FFD700, #FFA500);
+            color: #2d3748;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+            border: 2px solid #FFD700;
+            max-width: 700px;
+            width: 100%;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.4);
+        }
+
+        .badge-text {
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .portfolio-link {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            text-decoration: none;
+            margin: 0.5rem 0;
+            padding: 0.3rem 0.8rem;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-link:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.02);
+        }
+
+        .portfolio-description {
+            font-size: 0.85rem;
+            color: #4a5568;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .experience-item, .project-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .job-header, .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .job-title, .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .company, .project-tech {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .duration {
+            font-size: 0.9rem;
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .achievements {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .achievements li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .achievements li:before {
+            content: "▸";
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .skill-category h3 {
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .highlight {
+            background: #e6fffa;
+            border: 1px solid #38b2ac;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .highlight strong {
+            color: #2c7a7b;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .tech-item {
+            background: #edf2f7;
+            color: #4a5568;
+            padding: 0.2rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            
+            .header {
+                padding: 2rem 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .contact-item {
+                justify-content: center;
+            }
+            
+            .main-content {
+                padding: 1.5rem;
+            }
+            
+            .job-header, .project-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-badge {
+                padding: 1.2rem 1.5rem;
+                margin: 0 1rem;
+            }
+
+            .portfolio-link {
+                font-size: 1rem;
+                word-break: break-all;
+            }
+
+            .badge-text {
+                font-size: 0.8rem;
+            }
+
+            .portfolio-cta {
+                margin-top: 1.5rem;
+            }
+        }
+
+        .summary {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .summary p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .portfolio-callout {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .inline-portfolio-link {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid #FFD700;
+            transition: all 0.3s ease;
+        }
+
+        .inline-portfolio-link:hover {
+            color: #FFF;
+            border-bottom-color: #FFF;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Certification Styles */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .certification-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .certification-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .cert-image {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .certification-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .certification-item p {
+            font-size: 0.9rem;
+            color: #718096;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cert-image {
+                max-width: 150px;
+            }
+        }
+
+        /* Modal/Lightbox Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 2rem;
+        }
+
+        .modal-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease;
+        }
+
+        .close {
+            position: absolute;
+            top: 2rem;
+            right: 3rem;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #667eea;
+        }
+
+        .cert-image {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cert-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Mobile modal adjustments */
+        @media (max-width: 768px) {
+            .close {
+                top: 1rem;
+                right: 1.5rem;
+                font-size: 2.5rem;
+            }
+            
+            .modal-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Yap Sing Loon</h1>
+            <div class="title">Full-stack AI Engineer</div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>paceair@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>+65 8484 0779</span>
+                </div>
+            </div>
+            
+            <!-- Prominent Portfolio Call-to-Action -->
+            <div class="portfolio-cta">
+                <div class="portfolio-badge">
+                    <span class="badge-text">🚀 PORTFOLIO</span>
+                    <a href="https://app-dev-pro.github.io/rag-demo/portfolio.html" class="portfolio-link">
+                        https://app-dev-pro.github.io/rag-demo/portfolio.html
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+
+
+            <div class="section">
+                <h2 class="section-title">💼 Experience</h2>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Full-stack AI Engineer</div>
+                            <div class="company">Freelance</div>
+                        </div>
+                        <div class="duration">2022 - Present</div>
+                    </div>
+                    <ul style="list-style: none; padding: 0; color: #4a5568; font-size: 1rem; line-height: 1.8;">
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #667eea; font-weight: bold;">▸</span>
+                            <strong>LLM Frameworks & Local Hosting:</strong> Extensive experience with LangChain for building production-ready RAG pipelines and local LLM deployment using Ollama with Llama 3.2
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #667eea; font-weight: bold;">▸</span>
+                            <strong>Vector Databases:</strong> Proven expertise with Supabase + pgvector for semantic search, document embeddings, and high-performance similarity matching
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #667eea; font-weight: bold;">▸</span>
+                            <strong>Containerization:</strong> Advanced proficiency with Docker and docker-compose for multi-service AI application deployment and orchestration
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #667eea; font-weight: bold;">▸</span>
+                            <strong>React Frameworks:</strong> Production experience with Next.js 13+ including server components, TypeScript, and modern React patterns
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #667eea; font-weight: bold;">▸</span>
+                            <strong>RAG Pipeline Evaluation:</strong> Comprehensive end-to-end evaluation frameworks with automated metrics (ROUGE-L, BERTScore, faithfulness) and quality assurance
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #667eea; font-weight: bold;">▸</span>
+                            <strong>LLM Fine-tuning with PEFT:</strong> Hands-on experience with Unsloth framework for parameter-efficient fine-tuning using LoRA/QLoRA techniques
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #667eea; font-weight: bold;">▸</span>
+                            <strong>LLM Observability:</strong> Production implementation of LangSmith for comprehensive request tracing, performance monitoring, and analytics
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #667eea; font-weight: bold;">▸</span>
+                            <strong>Agentic Workflows:</strong> Designed and implemented 4-agent autonomous systems for evaluation coordination, quality assurance, and performance optimization
+                        </li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech-item">LangChain</span>
+                        <span class="tech-item">Supabase</span>
+                        <span class="tech-item">pgvector</span>
+                        <span class="tech-item">Next.js</span>
+                        <span class="tech-item">Python</span>
+                        <span class="tech-item">FastAPI</span>   
+                        <span class="tech-item">Local LLM Hosting</span>      
+                        <span class="tech-item">Docker Compose</span>
+                        <span class="tech-item">Unsloth Framework</span> 
+                        <span class="tech-item">LLM Fine-tuning (PEFT)</span>
+                        <span class="tech-item">RAG Pipelines</span>    
+                        <span class="tech-item">RAG Evaluation</span>      
+                        <span class="tech-item">LangSmith Observability</span>
+                        <span class="tech-item">Agentic Workflows</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🚀 Featured Projects</h2>
+                
+                <div class="project-item">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">RAG System with Agentic Evaluation</div>
+                        </div>
+                    </div>
+                    <ul class="achievements">
+                        <li>Built complete RAG pipeline with local LLM hosting (Ollama) and vector database integration</li>
+                        <li>Implemented 4-agent autonomous system for evaluation coordination, quality assurance, and performance optimization</li>
+                        <li>Integrated LangSmith for comprehensive observability with request tracing and performance analytics</li>
+                        <li>Created interactive evaluation dashboard with real-time metrics and quality trend analysis</li>
+                        <li>Containerized architecture with Docker Compose supporting multi-service deployment</li>
+                    </ul>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">LLM Fine-tuning with Unsloth PEFT Framework</div>
+                        </div>
+                    </div>
+                    <ul class="achievements">
+                        <li>Implemented Parameter-Efficient Fine-Tuning using LoRA/QLoRA techniques with Unsloth framework</li>
+                        <li>Achieved 2-5x faster training with 70% memory reduction compared to standard fine-tuning</li>
+                        <li>Developed specialized RAG training datasets with question-answer pairs</li>
+                        <li>Optimized model performance for domain-specific tasks while maintaining general capabilities</li>
+                    </ul>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">RAG Evaluation Framework</div>
+                        </div>
+                    </div>
+                    <ul class="achievements">
+                        <li>Developed automated evaluation pipeline with ROUGE-L, BERTScore, and faithfulness metrics</li>
+                        <li>Created comprehensive test suites covering retrieval quality, generation accuracy, and performance</li>
+                        <li>Built performance benchmarking tools measuring response time, throughput, and resource usage</li>
+                        <li>Designed interactive dashboards for real-time quality monitoring and trend analysis</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🎓 Technical Certifications</h2>
+                
+                <!-- Certification Images -->
+                <div class="certifications-grid">
+                    <div class="certification-item">
+                        <img src="images/rp-cert.jpg" alt="Professional Certificate in Joint Applied Artificial Intelligence Innovation and Training Programme" class="cert-image">
+                        <h3>Republic Polytechnic</h3>
+                        <p>Professional Certificate in Joint Applied Artificial Intelligence Innovation and Training Programme</p>
+                    </div>
+                    
+                    <div class="certification-item">
+                        <img src="images/nvidia-cert-1.png" alt="NVIDIA NLP Certification" class="cert-image">
+                        <h3>NVIDIA</h3>
+                        <p>Building Transformer-Based Natural Language Processing Applications</p>
+                    </div>
+                    
+                    <div class="certification-item">
+                        <img src="images/nvidia-cert-2.png" alt="NVIDIA Multi-GPU Certification" class="cert-image">
+                        <h3>NVIDIA</h3>
+                        <p>Fundamentals of Deep Learning for Multi GPUs</p>
+                    </div>
+                    
+                    <div class="certification-item">
+                        <img src="images/nlp-cert.png" alt="DeepLearning.AI NLP Certification" class="cert-image">
+                        <h3>DeepLearning.AI</h3>
+                        <p>Natural Language Processing in TensorFlow</p>
+                    </div>
+                </div>
+                
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Modal for full-size certificate images -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modalImage" class="modal-image" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        // Get modal elements
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.close');
+        const certImages = document.querySelectorAll('.cert-image');
+
+        // Add click event to all certificate images
+        certImages.forEach(image => {
+            image.addEventListener('click', function() {
+                modal.style.display = 'block';
+                modalImage.src = this.src;
+                modalImage.alt = this.alt;
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            });
+        });
+
+        // Close modal when clicking the X
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        });
+
+        // Close modal when clicking outside the image
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal || e.target === modal.querySelector('.modal-content')) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+        });
+
+        // Prevent modal from closing when clicking on the image itself
+        modalImage.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    </script>
+</body>
+</html>

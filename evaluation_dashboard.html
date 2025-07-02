@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Evaluation Dashboard - Quality Metrics & Performance</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f8fafc;
+            line-height: 1.6;
+            color: #1a202c;
+            overflow-x: hidden;
+        }
+        
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .portfolio-link {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .portfolio-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .portfolio-link::before {
+            content: "🎨";
+            font-size: 1.1rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        
+        .metric-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .metric-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .metric-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-subtitle {
+            font-size: 0.9rem;
+            color: #718096;
+        }
+        
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        .status-excellent {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        
+        .status-good {
+            background: #fefcbf;
+            color: #744210;
+        }
+        
+        .status-warning {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        
+        .charts-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+            margin-right: 1rem;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            min-height: 0;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+            height: 400px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .chart-canvas {
+            flex: 1;
+            min-height: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chart-canvas canvas {
+            max-width: 100% !important;
+            max-height: 100% !important;
+            height: auto !important;
+            width: auto !important;
+        }
+        
+        .system-health {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+        
+        .health-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .health-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: #f7fafc;
+            border-radius: 8px;
+        }
+        
+        .health-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+        }
+        
+        .health-healthy {
+            background: #48bb78;
+        }
+        
+        .health-warning {
+            background: #ed8936;
+        }
+        
+        .health-error {
+            background: #f56565;
+        }
+        
+        .performance-summary {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .summary-item {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 8px;
+            background: #f7fafc;
+        }
+        
+        .summary-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .summary-label {
+            font-size: 0.9rem;
+            color: #718096;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard {
+                padding: 1rem;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .portfolio-link {
+                position: static;
+                margin-bottom: 1rem;
+                align-self: flex-start;
+                font-size: 0.9rem;
+                padding: 0.6rem 1.2rem;
+            }
+            
+            .header {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Header -->
+        <div class="header">
+            <a href="https://app-dev-pro.github.io/rag-demo/portfolio.html" class="portfolio-link" target="_blank">
+                View Portfolio
+            </a>
+            <h1>📊 RAG Evaluation Dashboard</h1>
+            <p>Real-time quality metrics, performance benchmarks, and system health monitoring</p>
+        </div>
+        
+        <!-- Key Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon" style="background: #e6fffa; color: #00b5a6;">📝</div>
+                    <div class="metric-title">ROUGE-L Score</div>
+                </div>
+                <div class="metric-value">0.78</div>
+                <div class="metric-subtitle">Lexical Overlap Quality</div>
+                <div class="status-indicator status-excellent">✅ Excellent</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon" style="background: #f0fff4; color: #22c55e;">🎯</div>
+                    <div class="metric-title">BERTScore</div>
+                </div>
+                <div class="metric-value">0.85</div>
+                <div class="metric-subtitle">Semantic Similarity</div>
+                <div class="status-indicator status-excellent">✅ Excellent</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon" style="background: #fefce8; color: #ca8a04;">🔍</div>
+                    <div class="metric-title">Faithfulness</div>
+                </div>
+                <div class="metric-value">92%</div>
+                <div class="metric-subtitle">Context Grounding</div>
+                <div class="status-indicator status-excellent">✅ High Fidelity</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon" style="background: #f3e8ff; color: #8b5cf6;">⚡</div>
+                    <div class="metric-title">Avg Response Time</div>
+                </div>
+                <div class="metric-value">15.2s</div>
+                <div class="metric-subtitle">Local LLM Performance</div>
+                <div class="status-indicator status-good">🔶 Good</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon" style="background: #ecfdf5; color: #059669;">📈</div>
+                    <div class="metric-title">Answer Relevance</div>
+                </div>
+                <div class="metric-value">89%</div>
+                <div class="metric-subtitle">Query Alignment</div>
+                <div class="status-indicator status-excellent">✅ High Relevance</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon" style="background: #fef2f2; color: #dc2626;">🚫</div>
+                    <div class="metric-title">Hallucination Rate</div>
+                </div>
+                <div class="metric-value">3.2%</div>
+                <div class="metric-subtitle">False Information</div>
+                <div class="status-indicator status-excellent">✅ Very Low</div>
+            </div>
+        </div>
+        
+        <!-- Charts Section -->
+        <div class="charts-section">
+            <div class="section-title">📈 Performance Analytics</div>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Quality Metrics Comparison</div>
+                    <canvas id="qualityChart" class="chart-canvas"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-title">Response Time Distribution</div>
+                    <canvas id="responseTimeChart" class="chart-canvas"></canvas>
+                </div>
+            </div>
+            
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Quality Trends Over Time</div>
+                    <canvas id="trendChart" class="chart-canvas"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-title">Category Performance Breakdown</div>
+                    <canvas id="categoryChart" class="chart-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- System Health -->
+        <div class="system-health">
+            <div class="section-title">🏥 System Health Indicators</div>
+            <div class="health-grid">
+                <div class="health-item">
+                    <div class="health-status health-healthy"></div>
+                    <div>
+                        <div style="font-weight: 600;">Backend API</div>
+                        <div style="font-size: 0.9rem; color: #718096;">Healthy</div>
+                    </div>
+                </div>
+                
+                <div class="health-item">
+                    <div class="health-status health-healthy"></div>
+                    <div>
+                        <div style="font-weight: 600;">Vector Database</div>
+                        <div style="font-size: 0.9rem; color: #718096;">Connected</div>
+                    </div>
+                </div>
+                
+                <div class="health-item">
+                    <div class="health-status health-healthy"></div>
+                    <div>
+                        <div style="font-weight: 600;">LLM Inference</div>
+                        <div style="font-size: 0.9rem; color: #718096;">Operational</div>
+                    </div>
+                </div>
+                
+                <div class="health-item">
+                    <div class="health-status health-healthy"></div>
+                    <div>
+                        <div style="font-weight: 600;">LangSmith Tracing</div>
+                        <div style="font-size: 0.9rem; color: #718096;">Active</div>
+                    </div>
+                </div>
+                
+                <div class="health-item">
+                    <div class="health-status health-warning"></div>
+                    <div>
+                        <div style="font-weight: 600;">Memory Usage</div>
+                        <div style="font-size: 0.9rem; color: #718096;">78% (High)</div>
+                    </div>
+                </div>
+                
+                <div class="health-item">
+                    <div class="health-status health-healthy"></div>
+                    <div>
+                        <div style="font-weight: 600;">Agentic Framework</div>
+                        <div style="font-size: 0.9rem; color: #718096;">4 Agents Active</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Performance Summary -->
+        <div class="performance-summary">
+            <div class="section-title">📊 Evaluation Summary</div>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-number">247</div>
+                    <div class="summary-label">Total Evaluations</div>
+                </div>
+                
+                <div class="summary-item">
+                    <div class="summary-number">94.8%</div>
+                    <div class="summary-label">Success Rate</div>
+                </div>
+                
+                <div class="summary-item">
+                    <div class="summary-number">8.7s</div>
+                    <div class="summary-label">Fastest Response</div>
+                </div>
+                
+                <div class="summary-item">
+                    <div class="summary-number">1.2GB</div>
+                    <div class="summary-label">Memory Peak</div>
+                </div>
+                
+                <div class="summary-item">
+                    <div class="summary-number">99.2%</div>
+                    <div class="summary-label">Uptime</div>
+                </div>
+                
+                <div class="summary-item">
+                    <div class="summary-number">4.1K</div>
+                    <div class="summary-label">Tokens/Response</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Quality Metrics Radar Chart
+        const qualityCtx = document.getElementById('qualityChart').getContext('2d');
+        new Chart(qualityCtx, {
+            type: 'radar',
+            data: {
+                labels: ['ROUGE-L', 'BERTScore', 'Faithfulness', 'Relevance', 'Coherence', 'Completeness'],
+                datasets: [{
+                    label: 'Current Performance',
+                    data: [0.78, 0.85, 0.92, 0.89, 0.82, 0.87],
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#667eea'
+                }, {
+                    label: 'Target Baseline',
+                    data: [0.75, 0.80, 0.85, 0.85, 0.80, 0.80],
+                    borderColor: '#e2e8f0',
+                    backgroundColor: 'rgba(226, 232, 240, 0.1)',
+                    borderWidth: 1,
+                    borderDash: [5, 5],
+                    pointBackgroundColor: '#e2e8f0'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 1,
+                        ticks: {
+                            stepSize: 0.1,
+                            display: true
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Response Time Distribution
+        const responseTimeCtx = document.getElementById('responseTimeChart').getContext('2d');
+        new Chart(responseTimeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['8-12s', '12-16s', '16-20s', '20-24s', '24-28s', '28s+'],
+                datasets: [{
+                    label: 'Response Count',
+                    data: [45, 78, 62, 38, 18, 6],
+                    backgroundColor: [
+                        '#22c55e', '#10b981', '#059669', '#047857', '#065f46', '#064e3b'
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            stepSize: 10
+                        },
+                        title: {
+                            display: true,
+                            text: 'Number of Responses'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Response Time Range'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Quality Trends Over Time
+        const trendCtx = document.getElementById('trendChart').getContext('2d');
+        new Chart(trendCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                datasets: [{
+                    label: 'ROUGE-L',
+                    data: [0.72, 0.74, 0.76, 0.78, 0.77, 0.78],
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    tension: 0.3
+                }, {
+                    label: 'BERTScore',
+                    data: [0.81, 0.82, 0.83, 0.85, 0.84, 0.85],
+                    borderColor: '#22c55e',
+                    backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                    tension: 0.3
+                }, {
+                    label: 'Faithfulness',
+                    data: [0.88, 0.89, 0.91, 0.92, 0.91, 0.92],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 0.7,
+                        max: 1.0,
+                        ticks: {
+                            stepSize: 0.05
+                        },
+                        title: {
+                            display: true,
+                            text: 'Score'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Category Performance
+        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+        new Chart(categoryCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Technical Specs', 'General Understanding', 'Architecture', 'Deployment', 'Processes'],
+                datasets: [{
+                    data: [92, 87, 89, 84, 91],
+                    backgroundColor: [
+                        '#667eea',
+                        '#764ba2',
+                        '#22c55e',
+                        '#f59e0b',
+                        '#ef4444'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

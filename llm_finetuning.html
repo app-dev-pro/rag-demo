@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Engineer Portfolio: LLM Fine-tuning with PEFT (Unsloth)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #764ba2;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #764ba2;
+        }
+        
+        .hero {
+            padding: 60px 0 40px;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .main-content {
+            background: white;
+            margin: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .section {
+            padding: 3rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section h2 {
+            color: #764ba2;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section h3 {
+            color: #495057;
+            margin: 2rem 0 1rem 0;
+            font-size: 1.3rem;
+        }
+        
+        .section h4 {
+            color: #6c757d;
+            margin: 1.5rem 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        
+        .executive-summary {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #764ba2;
+        }
+        
+        .competencies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .competency-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .competency-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+        
+        .competency-card h4 {
+            color: #764ba2;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-tag {
+            background: #764ba2;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .tech-tag.framework {
+            background: #28a745;
+        }
+        
+        .tech-tag.technique {
+            background: #dc3545;
+        }
+        
+        .tech-tag.optimization {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .methodology-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .methodology-card h4 {
+            color: #764ba2;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .parameters-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .parameter-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #764ba2;
+        }
+        
+        .parameter-item strong {
+            color: #495057;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .code-snippet {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-left: 4px solid #764ba2;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .highlight-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #155724;
+        }
+        
+        .highlight-info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #0c5460;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .project-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid #e9ecef;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .project-card h4 {
+            color: #764ba2;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .metrics-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .metric-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .references {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .references h3 {
+            color: #764ba2;
+            margin-bottom: 1rem;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .references li::before {
+            content: "🔗";
+            position: absolute;
+            left: 0;
+        }
+        
+        .references a {
+            color: #764ba2;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .references a:hover {
+            text-decoration: underline;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .nav-button {
+            background: #764ba2;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .nav-button:hover {
+            background: #5a3a8a;
+            transform: translateY(-2px);
+        }
+        
+        .nav-button.secondary {
+            background: #6c757d;
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 2rem 1rem;
+            }
+            
+            .main-content {
+                margin: 10px;
+            }
+            
+            .competencies-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .parameters-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">🤖 LLM Fine-tuning Portfolio</div>
+                <div class="nav-links">
+                    <a href="portfolio.html">← Main Portfolio</a>
+                    <a href="#references">📚 References</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>🚀LLM Fine-tuning with Parameter-Efficient Fine-Tuning (PEFT) using Unsloth Framework</h1>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <!-- Executive Summary -->
+        <section class="section">
+            <h2>📋 Executive Summary</h2>
+            
+            <div class="executive-summary">
+                <p>As a dedicated AI Engineer, I have developed expertise in optimizing and fine-tuning Large Language Models (LLMs) to achieve superior performance and efficiency. My knowledge centers on <strong>Parameter-Efficient Fine-Tuning (PEFT)</strong> techniques, particularly leveraging the powerful <strong>Unsloth framework</strong>.</p>
+                
+                <p>I am prepared to navigate the complexities of LLM deployment, model selection, and hyperparameter optimization to deliver impactful AI solutions, even with limited computational resources.</p>
+            </div>
+            
+            <div class="tech-stack">
+                <span class="tech-tag framework">Unsloth AI</span>
+                <span class="tech-tag technique">LoRA</span>
+                <span class="tech-tag technique">QLoRA</span>
+                <span class="tech-tag technique">DPO</span>
+                <span class="tech-tag technique">ORPO</span>
+                <span class="tech-tag">Llama 3.1</span>
+                <span class="tech-tag">Mistral</span>
+                <span class="tech-tag">Gemma</span>
+                <span class="tech-tag optimization">PEFT</span>
+            </div>
+        </section>
+
+        <!-- Core Competencies -->
+        <section class="section">
+            <h2>🎯 Core Competencies</h2>
+            
+            <div class="competencies-grid">
+                <div class="competency-card">
+                    <h4>⚡ Parameter-Efficient Fine-Tuning (PEFT)</h4>
+                    <p>Knowledgeable in applying PEFT methods to fine-tune large models with significantly reduced computational resources and training time, while maintaining or improving performance.</p>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag technique">LoRA</span>
+                        <span class="tech-tag technique">QLoRA</span>
+                        <span class="tech-tag technique">DPO</span>
+                        <span class="tech-tag technique">ORPO</span>
+                    </div>
+                </div>
+                
+                <div class="competency-card">
+                    <h4>🚀 Unsloth Framework Mastery</h4>
+                    <p>Studied and prepared to work with Unsloth AI, understanding how to achieve dramatic acceleration in LLM fine-tuning with specialized optimizations.</p>
+                    
+                    <div class="metrics-display">
+                        <div class="metric-card">
+                            <div class="metric-value">2x</div>
+                            <div class="metric-label">Faster Training</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">70%</div>
+                            <div class="metric-label">Less Memory</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="competency-card">
+                    <h4>🎛️ Model Selection & Optimization</h4>
+                    <p>Equipped with knowledge for evaluating and selecting appropriate base or instruct models based on specific use cases, resource constraints, dataset size, and licensing terms.</p>
+                    
+                    <ul style="margin-top: 1rem;">
+                        <li>Resource Assessment & Matching</li>
+                        <li>Use Case Alignment</li>
+                        <li>Dataset Characteristics Analysis</li>
+                        <li>Latest Model Integration</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Approach -->
+        <section class="section">
+            <h2>🔬 Technical Approach & Methodologies</h2>
+            
+            <div class="highlight-info">
+                <strong>🎯 Philosophy:</strong> My approach to LLM fine-tuning is data-driven and performance-oriented, focusing on resource efficiency and model effectiveness.
+            </div>
+            
+            <div class="methodology-card">
+                <h4>🎯 Strategic Model Selection</h4>
+                <p>The choice of LLM is critical and is guided by multiple factors:</p>
+                
+                <div class="parameters-list">
+                    <div class="parameter-item">
+                        <strong>Use Case Alignment</strong>
+                        Selecting models tailored for specific tasks (vision models for image-based training, coder models for code datasets)
+                    </div>
+                    <div class="parameter-item">
+                        <strong>Resource Assessment</strong>
+                        Matching model size and VRAM requirements with available compute capacity
+                    </div>
+                    <div class="parameter-item">
+                        <strong>Dataset Characteristics</strong>
+                        Base model for >1,000 rows, instruct model for <300 rows or high-quality data 300-1,000 rows
+                    </div>
+                    <div class="parameter-item">
+                        <strong>Latest Models</strong>
+                        Prioritizing newest and most performant models from Unsloth's catalog
+                    </div>
+                </div>
+            </div>
+            
+            <div class="methodology-card">
+                <h4>⚙️ Parameter-Efficient Fine-Tuning with Unsloth</h4>
+                <p>I understand how to leverage Unsloth's optimized PEFT implementations with carefully configured hyperparameters:</p>
+                
+                <div class="parameters-list">
+                    <div class="parameter-item">
+                        <strong>Learning Rate: 2e-4</strong>
+                        Typical starting point for LoRA/QLoRA fine-tuning
+                    </div>
+                    <div class="parameter-item">
+                        <strong>Epochs: 1-3</strong>
+                        Balance performance and prevent overfitting
+                    </div>
+                    <div class="parameter-item">
+                        <strong>LoRA vs QLoRA</strong>
+                        16-bit LoRA (higher accuracy) or 4-bit QLoRA (lower VRAM)
+                    </div>
+                    <div class="parameter-item">
+                        <strong>LoRA Rank: 16-32</strong>
+                        Alpha often set equal to or double the rank
+                    </div>
+                    <div class="parameter-item">
+                        <strong>Weight Decay: 0.01</strong>
+                        Regularization for better generalization
+                    </div>
+                    <div class="parameter-item">
+                        <strong>Scheduler: cosine_with_restarts</strong>
+                        Optimized for Unsloth framework
+                    </div>
+                </div>
+                
+                <div class="code-snippet">
+<span style="color: #68d391;"># Example Unsloth configuration</span>
+model = FastLanguageModel.from_pretrained(
+    model_name = "unsloth/llama-3-8b-bnb-4bit",
+    max_seq_length = 2048,
+    dtype = None,
+    load_in_4bit = True,
+)
+
+model = FastLanguageModel.get_peft_model(
+    model,
+    r = 16,
+    target_modules = ["q_proj", "k_proj", "v_proj", "o_proj",
+                      "gate_proj", "up_proj", "down_proj"],
+    lora_alpha = 16,
+    lora_dropout = 0,
+    bias = "none",
+    use_gradient_checkpointing = True,
+    random_state = 3407,
+)
+                </div>
+            </div>
+            
+            <div class="methodology-card">
+                <h4>🚀 Optimization and Performance Enhancement</h4>
+                <p>Strategies to maximize fine-tuning efficiency and model quality:</p>
+                
+                <ul>
+                    <li><strong>Unsloth's Intrinsic Optimizations:</strong> Fully exploiting built-in speed and memory advantages</li>
+                    <li><strong>Overfitting/Underfitting Mitigation:</strong> Adjusting learning rates, epochs, weight decay, and batch size</li>
+                    <li><strong>Model Merging & Export:</strong> LoRA adapter merging and export to vLLM-compatible or GGUF formats</li>
+                    <li><strong>Consumer GPU Deployment:</strong> Enabling fine-tuning on platforms like Google Colab</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Project Capabilities -->
+        <section class="section">
+            <h2>🛠️ Project Capabilities</h2>
+            
+            <div class="highlight">
+                <strong>💡 Note:</strong> The following represent the types of projects I am prepared to undertake with my LLM fine-tuning knowledge and capabilities:
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h4>🏥 Domain-Specific LLM Adaptation</h4>
+                    <p>Ready to fine-tune Llama or Gemma models on specialized datasets using Unsloth and LoRA/QLoRA to significantly enhance domain understanding and generation capabilities.</p>
+                    
+                    <div class="highlight-success">
+                        <strong>Approach:</strong> Meticulous dataset preparation, hyperparameter tuning, and comprehensive performance evaluation
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h4>📚 Instruction-Following Model Enhancement</h4>
+                    <p>Prepared to adapt existing instruct models with custom, high-quality instruction datasets using Unsloth's DPO or ORPO capabilities to improve complex prompt following.</p>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag technique">DPO</span>
+                        <span class="tech-tag technique">ORPO</span>
+                        <span class="tech-tag">Mistral-Instruct</span>
+                    </div>
+                    
+                    <div class="highlight-success">
+                        <strong>Focus:</strong> Advanced alignment techniques for nuanced prompt understanding
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h4>💻 Resource-Constrained Fine-tuning Challenge</h4>
+                    <p>Equipped to demonstrate fine-tuning of large LLMs on consumer-grade GPUs, showcasing Unsloth's efficiency with competitive performance metrics.</p>
+                    
+                    <div class="metrics-display">
+                        <div class="metric-card">
+                            <div class="metric-value">9GB</div>
+                            <div class="metric-label">VRAM (Colab T5)</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">7B-13B</div>
+                            <div class="metric-label">Model Size</div>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-success">
+                        <strong>Goal:</strong> Competitive performance on limited hardware resources
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Performance Targets -->
+        <section class="section">
+            <h2>📈 Performance Targets</h2>
+            
+            <div class="metrics-display">
+                <div class="metric-card">
+                    <div class="metric-value">2x</div>
+                    <div class="metric-label">Training Speed Target</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">70%</div>
+                    <div class="metric-label">Memory Usage Reduction</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">9GB</div>
+                    <div class="metric-label">Min VRAM Required</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">1-3</div>
+                    <div class="metric-label">Optimal Epochs</div>
+                </div>
+            </div>
+            
+            <div class="highlight-success">
+                <strong>🎯 Objective:</strong> Achieving enterprise-level model performance with consumer-grade hardware through strategic PEFT implementation and Unsloth optimization.
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="section">
+            <h2>🎯 Conclusion</h2>
+            
+            <div class="executive-summary">
+                <p>My knowledge in PEFT techniques, particularly with the <strong>Unsloth framework</strong>, combined with a comprehensive understanding of LLM fine-tuning best practices, positions me as a valuable asset for any team aiming to build and deploy highly efficient and performant AI systems.</p>
+                
+                <p>I am eager to apply my skills to challenging problems and contribute to innovative projects in the rapidly evolving field of artificial intelligence.</p>
+            </div>
+            
+            <div class="highlight-info">
+                <strong>💼 Ready to Contribute:</strong> Seeking opportunities to leverage cutting-edge PEFT techniques and Unsloth optimizations in production AI systems, delivering maximum performance with minimal computational overhead.
+            </div>
+        </section>
+
+        <!-- References -->
+        <section class="section" id="references">
+            <h2>📚 References</h2>
+            
+            <div class="references">
+                <h3>Essential Resources & Documentation</h3>
+                <ul>
+                    <li><a href="https://docs.unsloth.ai/get-started/fine-tuning-guide" target="_blank">Unsloth Fine-tuning Guide</a></li>
+                    <li><a href="https://docs.unsloth.ai/get-started/fine-tuning-guide/what-model-should-i-use" target="_blank">What Model Should I Use?</a></li>
+                    <li><a href="https://docs.unsloth.ai/get-started/fine-tuning-guide/lora-hyperparameters-guide" target="_blank">LoRA Hyperparameters Guide</a></li>
+                    <li><a href="https://www.datacamp.com/tutorial/unsloth-guide-optimize-and-speed-up-llm-fine-tuning" target="_blank">Unsloth Guide: Optimize and Speed Up LLM Fine-tuning (DataCamp)</a></li>
+                    <li><a href="https://www.stephendiehl.com/posts/orpo/" target="_blank">Fine-tuning with ORPO and Unsloth (Stephen Diehl)</a></li>
+                    <li><a href="https://medium.com/@kushalvala/fine-tuning-large-language-models-with-unsloth-380216a76108" target="_blank">Fine-Tuning Large Language Models with Unsloth (Kushal Vala - Medium)</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <div class="navigation-buttons">
+            <a href="portfolio.html" class="nav-button secondary">← Back to Main Portfolio</a>
+            <a href="demo_showcase.html" class="nav-button">🎬 View RAG Demo</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 AI Engineer Portfolio - LLM Fine-tuning Expertise with PEFT & Unsloth</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add fade-in animation for sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animation
+        document.querySelectorAll('.section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add hover effects for cards
+        document.querySelectorAll('.competency-card, .project-card, .methodology-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 12px 40px rgba(0,0,0,0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{
+  "agent_id": "quality_assurance",
+  "status": "active",
+  "last_updated": "2025-06-30T17:49:46.371007",
+  "decision_history": [
+    {
+      "agent": "quality_assurance",
+      "timestamp": "2025-06-30T17:47:31.704197",
+      "current_quality": 0.9541976451873779,
+      "average_quality": 0.9541976451873779,
+      "trend": "declining",
+      "decision": "adjust_quality_gates",
+      "reasoning": "Quality trend is declining, adjusting thresholds"
+    },
+    {
+      "agent": "quality_assurance",
+      "timestamp": "2025-06-30T17:48:01.723614",
+      "current_quality": 0.9736142158508301,
+      "average_quality": 0.963905930519104,
+      "trend": "improving",
+      "decision": "adjust_quality_gates",
+      "reasoning": "Quality trend is improving, adjusting thresholds"
+    },
+    {
+      "agent": "quality_assurance",
+      "timestamp": "2025-06-30T17:48:16.273099",
+      "current_quality": 0.7730991840362549,
+      "average_quality": 0.7730991840362549,
+      "trend": "declining",
+      "decision": "adjust_quality_gates",
+      "reasoning": "Quality trend is declining, adjusting thresholds"
+    },
+    {
+      "agent": "quality_assurance",
+      "timestamp": "2025-06-30T17:48:46.306439",
+      "current_quality": 0.8064393997192383,
+      "average_quality": 0.7897692918777466,
+      "trend": "improving",
+      "decision": "adjust_quality_gates",
+      "reasoning": "Quality trend is improving, adjusting thresholds"
+    },
+    {
+      "agent": "quality_assurance",
+      "timestamp": "2025-06-30T17:49:01.776867",
+      "current_quality": 0.7768676280975342,
+      "average_quality": 0.9015598297119141,
+      "trend": "declining",
+      "decision": "adjust_quality_gates",
+      "reasoning": "Quality trend is declining, adjusting thresholds"
+    },
+    {
+      "agent": "quality_assurance",
+      "timestamp": "2025-06-30T17:49:46.354991",
+      "current_quality": 0.8549911975860596,
+      "average_quality": 0.811509927113851,
+      "trend": "improving",
+      "decision": "adjust_quality_gates",
+      "reasoning": "Quality trend is improving, adjusting thresholds"
+    }
+  ],
+  "performance_metrics": {},
+  "learned_parameters": {}
+}

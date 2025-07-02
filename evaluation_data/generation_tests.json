@@ -1,0 +1,97 @@
+{
+  "metadata": {
+    "created_at": "2025-07-01T11:42:33.096265",
+    "version": "1.0.0",
+    "description": "RAG System Evaluation Dataset",
+    "total_qa_pairs": 12,
+    "total_retrieval_tests": 8,
+    "total_generation_tests": 6,
+    "total_performance_tests": 4,
+    "categories": [
+      "DevOps",
+      "AI/ML",
+      "Infrastructure"
+    ],
+    "difficulty_levels": [
+      "intermediate",
+      "beginner",
+      "advanced"
+    ]
+  },
+  "generation_tests": [
+    {
+      "question": "What performance improvements does Unsloth provide?",
+      "context": "The Unsloth framework provides 2x faster training and 70% memory reduction. Techniques include DPO and ORPO for preference optimization.",
+      "expected_elements": [
+        "2x faster",
+        "70% memory reduction"
+      ],
+      "test_type": "faithfulness",
+      "description": "Answer should include specific quantitative claims from context",
+      "test_id": "generation_test_001",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "What are examples of modern LLMs?",
+      "context": "Modern LLMs like GPT, BERT, and T5 have revolutionized natural language processing.",
+      "expected_elements": [
+        "GPT",
+        "BERT",
+        "T5"
+      ],
+      "test_type": "faithfulness",
+      "description": "Answer should mention specific models from context",
+      "test_id": "generation_test_002",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "How does RAG work?",
+      "irrelevant_elements": [
+        "Docker",
+        "Next.js",
+        "FastAPI"
+      ],
+      "test_type": "relevance",
+      "description": "RAG explanation should not include unrelated technologies",
+      "test_id": "generation_test_003",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "What is Docker used for?",
+      "relevant_elements": [
+        "containers",
+        "deployment",
+        "environments"
+      ],
+      "test_type": "relevance",
+      "description": "Docker answer should focus on containerization concepts",
+      "test_id": "generation_test_004",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "What are the key components of a RAG system?",
+      "required_elements": [
+        "retrieval",
+        "generation",
+        "embeddings",
+        "vector storage"
+      ],
+      "test_type": "completeness",
+      "description": "Should cover main RAG components",
+      "test_id": "generation_test_005",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "What are vector databases used for?",
+      "required_elements": [
+        "embeddings",
+        "semantic meaning",
+        "high-dimensional"
+      ],
+      "test_type": "completeness",
+      "description": "Should explain vector database purpose and characteristics",
+      "test_id": "generation_test_006",
+      "created_at": "2025-07-01T11:42:33.096265"
+    }
+  ]
+}

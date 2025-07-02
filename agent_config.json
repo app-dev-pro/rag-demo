@@ -1,0 +1,66 @@
+{
+  "version": "1.0.0",
+  "framework": "rag-agentic-evaluation",
+  "created": "2025-06-30T17:47:01.049893",
+  "agents": {
+    "evaluation_coordinator": {
+      "type": "coordinator",
+      "description": "Orchestrates evaluation pipeline and resource allocation",
+      "enabled": true,
+      "config": {
+        "max_concurrent_evaluations": 3,
+        "evaluation_interval": 300,
+        "resource_threshold": 0.8
+      }
+    },
+    "quality_assurance": {
+      "type": "monitor",
+      "description": "Monitors response quality and implements adaptive quality gates",
+      "enabled": true,
+      "config": {
+        "quality_threshold": 0.75,
+        "adaptation_rate": 0.1,
+        "monitoring_interval": 60
+      }
+    },
+    "performance_optimizer": {
+      "type": "optimizer",
+      "description": "Analyzes and optimizes system performance parameters",
+      "enabled": true,
+      "config": {
+        "optimization_targets": [
+          "response_time",
+          "accuracy",
+          "resource_usage"
+        ],
+        "learning_rate": 0.05,
+        "optimization_interval": 600
+      }
+    },
+    "monitoring_alerting": {
+      "type": "monitor",
+      "description": "Proactive system health monitoring and alerting",
+      "enabled": true,
+      "config": {
+        "alert_thresholds": {
+          "response_time": 30000,
+          "error_rate": 0.05,
+          "memory_usage": 0.9
+        },
+        "monitoring_interval": 30
+      }
+    }
+  },
+  "orchestration": {
+    "communication_protocol": "async_message_queue",
+    "state_persistence": "file_based",
+    "coordination_strategy": "consensus_based",
+    "fault_tolerance": true
+  },
+  "observability": {
+    "langsmith_integration": true,
+    "structured_logging": true,
+    "metrics_collection": true,
+    "decision_audit_trail": true
+  }
+}

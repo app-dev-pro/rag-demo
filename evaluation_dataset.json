@@ -1,0 +1,141 @@
+{
+  "metadata": {
+    "created_date": "2025-07-01T11:24:23.196201",
+    "total_questions": 11,
+    "categories": [
+      "process_explanation",
+      "technical_architecture",
+      "information_not_available",
+      "general_understanding",
+      "deployment_details",
+      "technical_details",
+      "application_purpose",
+      "technical_specification"
+    ],
+    "difficulty_levels": [
+      "easy",
+      "medium",
+      "hard"
+    ],
+    "description": "Comprehensive evaluation dataset for RAG pipeline testing"
+  },
+  "questions": [
+    {
+      "question": "What is this document about?",
+      "reference_answer": "This document describes a RAG (Retrieval-Augmented Generation) demo application that combines information retrieval with language model generation to create intelligent question-answering systems.",
+      "category": "general_understanding",
+      "difficulty": "easy",
+      "expected_context": [
+        "RAG",
+        "demo application",
+        "information retrieval",
+        "language model generation"
+      ]
+    },
+    {
+      "question": "What technologies are used in this RAG system?",
+      "reference_answer": "The RAG system uses FastAPI backend, Next.js frontend, Supabase with pgvector for storing document embeddings, and Ollama for running the llama3.2:1b language model locally.",
+      "category": "technical_details",
+      "difficulty": "medium",
+      "expected_context": [
+        "FastAPI",
+        "Next.js",
+        "Supabase",
+        "pgvector",
+        "Ollama",
+        "llama3.2:1b"
+      ]
+    },
+    {
+      "question": "How does RAG work according to this document?",
+      "reference_answer": "RAG works by first retrieving relevant information from a knowledge base (stored in Supabase with pgvector), then using that information as context for the language model to generate accurate and informed responses.",
+      "category": "process_explanation",
+      "difficulty": "medium",
+      "expected_context": [
+        "retrieving relevant information",
+        "knowledge base",
+        "Supabase",
+        "pgvector",
+        "context",
+        "language model"
+      ]
+    },
+    {
+      "question": "What language model is used in this demo?",
+      "reference_answer": "The demo uses the llama3.2:1b language model running locally through Ollama.",
+      "category": "technical_specification",
+      "difficulty": "easy",
+      "expected_context": [
+        "llama3.2:1b",
+        "Ollama",
+        "locally"
+      ]
+    },
+    {
+      "question": "What is the purpose of this RAG demonstration?",
+      "reference_answer": "This demo allows users to ask questions about ingested documents and receive contextually relevant answers powered by the llama3.2:1b model, demonstrating how to combine information retrieval with language model generation.",
+      "category": "application_purpose",
+      "difficulty": "medium",
+      "expected_context": [
+        "ask questions",
+        "ingested documents",
+        "contextually relevant answers",
+        "llama3.2:1b"
+      ]
+    },
+    {
+      "question": "What frontend technology is mentioned?",
+      "reference_answer": "The frontend uses Next.js for the user interface.",
+      "category": "technical_details",
+      "difficulty": "easy",
+      "expected_context": [
+        "Next.js",
+        "frontend",
+        "user interface"
+      ]
+    },
+    {
+      "question": "Where are the document embeddings stored?",
+      "reference_answer": "Document embeddings are stored in Supabase with pgvector extension.",
+      "category": "technical_architecture",
+      "difficulty": "medium",
+      "expected_context": [
+        "Supabase",
+        "pgvector",
+        "document embeddings",
+        "stored"
+      ]
+    },
+    {
+      "question": "Is the language model running locally or in the cloud?",
+      "reference_answer": "The language model is running locally using Ollama.",
+      "category": "deployment_details",
+      "difficulty": "easy",
+      "expected_context": [
+        "locally",
+        "Ollama"
+      ]
+    },
+    {
+      "question": "What database is used for storing user authentication data?",
+      "reference_answer": "The document does not mention user authentication or a specific database for authentication data.",
+      "category": "information_not_available",
+      "difficulty": "hard",
+      "expected_context": []
+    },
+    {
+      "question": "How much does this system cost to operate?",
+      "reference_answer": "The document does not provide information about operational costs.",
+      "category": "information_not_available",
+      "difficulty": "hard",
+      "expected_context": []
+    },
+    {
+      "question": "What are the performance benchmarks for this RAG system?",
+      "reference_answer": "The document does not include specific performance benchmarks or metrics.",
+      "category": "information_not_available",
+      "difficulty": "hard",
+      "expected_context": []
+    }
+  ]
+}

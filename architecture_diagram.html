@@ -1,0 +1,259 @@
+ss<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG System Architecture Diagram</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        
+        .architecture-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .architecture-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 2rem;
+        }
+        
+        .architecture-diagram {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto auto auto;
+            gap: 2rem;
+            align-items: center;
+            justify-items: center;
+            min-height: 600px;
+        }
+        
+        .component {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            min-width: 180px;
+            position: relative;
+        }
+        
+        .component h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+        
+        .component p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .frontend {
+            grid-column: 2;
+            grid-row: 1;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        .backend {
+            grid-column: 2;
+            grid-row: 2;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        
+        .database {
+            grid-column: 1;
+            grid-row: 3;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        
+        .llm {
+            grid-column: 3;
+            grid-row: 3;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+        
+        .observability {
+            grid-column: 1;
+            grid-row: 4;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+        }
+        
+        .agents {
+            grid-column: 3;
+            grid-row: 4;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+        
+        .arrow {
+            position: absolute;
+            font-size: 2rem;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .arrow-down {
+            grid-column: 2;
+            justify-self: center;
+        }
+        
+        .arrow-right {
+            justify-self: start;
+            margin-left: -1rem;
+        }
+        
+        .arrow-left {
+            justify-self: end;
+            margin-right: -1rem;
+        }
+        
+        .data-flow {
+            background: #e2e8f0;
+            color: #4a5568;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        
+        .tech-stack {
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-item {
+            background: #f7fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .tech-item h4 {
+            margin: 0 0 0.5rem 0;
+            color: #2d3748;
+        }
+        
+        .tech-item p {
+            margin: 0;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="architecture-container">
+        <h1 class="architecture-title">🏗️ RAG System Architecture</h1>
+        
+        <div class="architecture-diagram">
+            <!-- Frontend -->
+            <div class="component frontend">
+                <h3>🖥️ Frontend</h3>
+                <p>Next.js 13+ React</p>
+                <p>Tailwind CSS</p>
+                <div class="data-flow">User Interface</div>
+            </div>
+            
+            <!-- Arrow from Frontend to Backend -->
+            <div class="arrow arrow-down" style="grid-row: 1.5; grid-column: 2;">↓</div>
+            
+            <!-- Backend API -->
+            <div class="component backend">
+                <h3>⚡ Backend API</h3>
+                <p>FastAPI + LangChain</p>
+                <p>Async Processing</p>
+                <div class="data-flow">RAG Pipeline</div>
+            </div>
+            
+            <!-- Arrows from Backend to Database and LLM -->
+            <div class="arrow" style="grid-row: 2.5; grid-column: 1.5;">↙</div>
+            <div class="arrow" style="grid-row: 2.5; grid-column: 2.5;">↘</div>
+            
+            <!-- Vector Database -->
+            <div class="component database">
+                <h3>🗄️ Vector Database</h3>
+                <p>Supabase PostgreSQL</p>
+                <p>pgvector Extension</p>
+                <div class="data-flow">Vector Storage</div>
+            </div>
+            
+            <!-- Local LLM -->
+            <div class="component llm">
+                <h3>🤖 Local LLM</h3>
+                <p>Ollama Runtime</p>
+                <p>Llama 3.2:1b</p>
+                <div class="data-flow">Text Generation</div>
+            </div>
+            
+            <!-- Observability -->
+            <div class="component observability">
+                <h3>📊 Observability</h3>
+                <p>LangSmith Tracing</p>
+                <p>Structured Logging</p>
+                <div class="data-flow">Monitoring</div>
+            </div>
+            
+            <!-- Agentic Framework -->
+            <div class="component agents">
+                <h3>🤖 Agentic Framework</h3>
+                <p>4 Autonomous Agents</p>
+                <p>Quality & Performance</p>
+                <div class="data-flow">Evaluation</div>
+            </div>
+            
+            <!-- Arrows from bottom components to backend -->
+            <div class="arrow" style="grid-row: 3.5; grid-column: 1.5;">↗</div>
+            <div class="arrow" style="grid-row: 3.5; grid-column: 2.5;">↖</div>
+        </div>
+        
+        <div class="tech-stack">
+            <h2>🔧 Technology Stack Details</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <h4>Frontend Layer</h4>
+                    <p>Next.js 13+, React, Tailwind CSS, TypeScript</p>
+                </div>
+                <div class="tech-item">
+                    <h4>API Layer</h4>
+                    <p>FastAPI, LangChain, Pydantic, Async/Await</p>
+                </div>
+                <div class="tech-item">
+                    <h4>Data Layer</h4>
+                    <p>Supabase, PostgreSQL, pgvector, FastEmbed</p>
+                </div>
+                <div class="tech-item">
+                    <h4>AI Layer</h4>
+                    <p>Ollama, Llama 3.2:1b, Local Inference</p>
+                </div>
+                <div class="tech-item">
+                    <h4>Observability</h4>
+                    <p>LangSmith, Structured Logging, Health Checks</p>
+                </div>
+                <div class="tech-item">
+                    <h4>Deployment</h4>
+                    <p>Docker Compose, Container Orchestration</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

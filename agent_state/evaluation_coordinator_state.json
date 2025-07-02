@@ -1,0 +1,39 @@
+{
+  "agent_id": "evaluation_coordinator",
+  "status": "active",
+  "last_updated": "2025-06-30T17:48:16.270096",
+  "decision_history": [
+    {
+      "agent": "evaluation_coordinator",
+      "timestamp": "2025-06-30T17:47:31.690317",
+      "evaluation_result": {
+        "timestamp": "2025-06-30T17:47:31.689320",
+        "query": "What are the key features of this RAG system?",
+        "response_time": 14.189320802688599,
+        "accuracy_score": 0.9393208026885986,
+        "retrieval_docs": 3,
+        "hallucination_detected": false,
+        "user_satisfaction": 0.8893207054732045
+      },
+      "decision": "continue_monitoring",
+      "reasoning": "System performing within acceptable parameters"
+    },
+    {
+      "agent": "evaluation_coordinator",
+      "timestamp": "2025-06-30T17:48:16.249054",
+      "evaluation_result": {
+        "timestamp": "2025-06-30T17:48:16.249054",
+        "query": "What are the key features of this RAG system?",
+        "response_time": 18.749054193496704,
+        "accuracy_score": 0.9990541934967041,
+        "retrieval_docs": 3,
+        "hallucination_detected": false,
+        "user_satisfaction": 0.8490540962813076
+      },
+      "decision": "continue_monitoring",
+      "reasoning": "System performing within acceptable parameters"
+    }
+  ],
+  "performance_metrics": {},
+  "learned_parameters": {}
+}

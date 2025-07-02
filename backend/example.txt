@@ -1,0 +1,13 @@
+This is a sample document for the RAG (Retrieval-Augmented Generation) demo application.
+
+The application demonstrates how to combine information retrieval with language model generation to create intelligent question-answering systems.
+
+Key components of this RAG system:
+- FastAPI backend for handling API requests
+- Next.js frontend for the user interface
+- Supabase with pgvector for storing document embeddings
+- Ollama for running the llama3.2:1b language model locally
+
+RAG works by first retrieving relevant information from a knowledge base (stored in Supabase with pgvector), then using that information as context for the language model to generate accurate and informed responses.
+
+This demo allows users to ask questions about the ingested documents and receive contextually relevant answers powered by the llama3.2:1b model.

@@ -1,0 +1,20 @@
+fastapi
+uvicorn
+pydantic
+langchain
+langchain-community
+langchain-core
+supabase
+pgvector
+psycopg2-binary
+fastembed
+ollama
+python-multipart
+
+# LLM Observability & Monitoring
+langsmith
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-exporter-otlp
+prometheus-client
+structlog

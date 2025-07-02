@@ -1,0 +1,36 @@
+{
+  "agent_id": "performance_optimizer",
+  "status": "active",
+  "last_updated": "2025-06-30T17:48:16.308674",
+  "decision_history": [
+    {
+      "agent": "performance_optimizer",
+      "timestamp": "2025-06-30T17:47:31.719068",
+      "metrics": {
+        "response_time": 15.71906852722168,
+        "memory_usage": 0.8190685920319425,
+        "cpu_usage": 0.5190684300062856
+      },
+      "decision": "optimize_retrieval_parameters",
+      "reasoning": "Response time optimization needed",
+      "actions": [
+        "reduce_chunk_size",
+        "optimize_similarity_threshold"
+      ],
+      "expected_improvement": "10-15% response time reduction"
+    },
+    {
+      "agent": "performance_optimizer",
+      "timestamp": "2025-06-30T17:48:16.294166",
+      "metrics": {
+        "response_time": 12.294166088104248,
+        "memory_usage": 0.6941661529145124,
+        "cpu_usage": 0.6941659908888514
+      },
+      "decision": "monitor_performance",
+      "reasoning": "Performance within acceptable ranges"
+    }
+  ],
+  "performance_metrics": {},
+  "learned_parameters": {}
+}

@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "created_at": "2025-07-01T11:42:33.096265",
+    "version": "1.0.0",
+    "description": "RAG System Evaluation Dataset",
+    "total_qa_pairs": 12,
+    "total_retrieval_tests": 8,
+    "total_generation_tests": 6,
+    "total_performance_tests": 4,
+    "categories": [
+      "DevOps",
+      "AI/ML",
+      "Infrastructure"
+    ],
+    "difficulty_levels": [
+      "intermediate",
+      "beginner",
+      "advanced"
+    ]
+  },
+  "retrieval_tests": [
+    {
+      "query": "large language models neural networks",
+      "expected_doc_ids": [
+        "doc_001"
+      ],
+      "test_type": "exact_match",
+      "description": "Direct keyword match should retrieve LLM document",
+      "test_id": "retrieval_test_001",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "query": "RAG retrieval augmented generation",
+      "expected_doc_ids": [
+        "doc_002"
+      ],
+      "test_type": "exact_match",
+      "description": "RAG terminology should retrieve RAG architecture document",
+      "test_id": "retrieval_test_002",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "query": "LoRA QLoRA fine-tuning",
+      "expected_doc_ids": [
+        "doc_004"
+      ],
+      "test_type": "exact_match",
+      "description": "Fine-tuning terms should retrieve fine-tuning document",
+      "test_id": "retrieval_test_003",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "query": "semantic meaning embeddings",
+      "expected_doc_ids": [
+        "doc_003"
+      ],
+      "test_type": "semantic_match",
+      "description": "Semantic concepts should retrieve vector database document",
+      "test_id": "retrieval_test_004",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "query": "machine learning algorithms",
+      "unexpected_doc_ids": [
+        "doc_005",
+        "doc_007",
+        "doc_008"
+      ],
+      "test_type": "negative_match",
+      "description": "General ML query should not retrieve DevOps/Frontend docs",
+      "test_id": "retrieval_test_005",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "query": "web development frameworks",
+      "unexpected_doc_ids": [
+        "doc_001",
+        "doc_004"
+      ],
+      "test_type": "negative_match",
+      "description": "Web dev query should not retrieve AI/ML specific docs",
+      "test_id": "retrieval_test_006",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "query": "AI system deployment and monitoring",
+      "expected_doc_ids": [
+        "doc_005",
+        "doc_006"
+      ],
+      "min_retrieved": 2,
+      "test_type": "multi_document",
+      "description": "Should retrieve both Docker and LangSmith documents",
+      "test_id": "retrieval_test_007",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "query": "full-stack AI application development",
+      "expected_doc_ids": [
+        "doc_002",
+        "doc_007",
+        "doc_008"
+      ],
+      "min_retrieved": 2,
+      "test_type": "multi_document",
+      "description": "Should retrieve documents about RAG, frontend, and backend",
+      "test_id": "retrieval_test_008",
+      "created_at": "2025-07-01T11:42:33.096265"
+    }
+  ]
+}

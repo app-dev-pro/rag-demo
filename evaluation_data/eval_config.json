@@ -1,0 +1,20 @@
+{
+  "evaluation_settings": {
+    "retrieval_top_k": 5,
+    "generation_max_tokens": 512,
+    "similarity_threshold": 0.7,
+    "timeout_seconds": 30
+  },
+  "metrics_config": {
+    "enable_bleu": true,
+    "enable_rouge": true,
+    "enable_bertscore": true,
+    "enable_faithfulness": true,
+    "enable_relevance": true
+  },
+  "performance_thresholds": {
+    "max_response_time_ms": 5000,
+    "min_accuracy_percent": 80,
+    "max_hallucination_rate": 0.1
+  }
+}

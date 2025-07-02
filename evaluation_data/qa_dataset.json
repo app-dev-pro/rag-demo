@@ -1,0 +1,285 @@
+{
+  "metadata": {
+    "created_at": "2025-07-01T11:42:33.096265",
+    "version": "1.0.0",
+    "description": "RAG System Evaluation Dataset",
+    "total_qa_pairs": 12,
+    "total_retrieval_tests": 8,
+    "total_generation_tests": 6,
+    "total_performance_tests": 4,
+    "categories": [
+      "DevOps",
+      "AI/ML",
+      "Infrastructure"
+    ],
+    "difficulty_levels": [
+      "intermediate",
+      "beginner",
+      "advanced"
+    ]
+  },
+  "documents": [
+    {
+      "id": "doc_001",
+      "title": "Introduction to Large Language Models",
+      "content": "Large Language Models (LLMs) are neural networks trained on vast amounts of text data. They can understand and generate human-like text across various domains. Modern LLMs like GPT, BERT, and T5 have revolutionized natural language processing.",
+      "metadata": {
+        "category": "AI/ML",
+        "difficulty": "beginner"
+      }
+    },
+    {
+      "id": "doc_002",
+      "title": "RAG System Architecture",
+      "content": "Retrieval-Augmented Generation (RAG) combines information retrieval with text generation. The system first retrieves relevant documents from a knowledge base, then uses this context to generate accurate, grounded responses. Key components include document embedding, vector storage, and LLM integration.",
+      "metadata": {
+        "category": "AI/ML",
+        "difficulty": "intermediate"
+      }
+    },
+    {
+      "id": "doc_003",
+      "title": "Vector Databases and Embeddings",
+      "content": "Vector databases store high-dimensional embeddings that represent semantic meaning of text. Popular options include Pinecone, Weaviate, and pgvector. Embeddings are created using models like OpenAI's text-embedding-ada-002 or open-source alternatives like FastEmbed.",
+      "metadata": {
+        "category": "Infrastructure",
+        "difficulty": "intermediate"
+      }
+    },
+    {
+      "id": "doc_004",
+      "title": "LLM Fine-tuning Techniques",
+      "content": "Parameter-Efficient Fine-Tuning (PEFT) methods like LoRA and QLoRA allow adaptation of large models with minimal computational resources. The Unsloth framework provides 2x faster training and 70% memory reduction. Techniques include DPO and ORPO for preference optimization.",
+      "metadata": {
+        "category": "AI/ML",
+        "difficulty": "advanced"
+      }
+    },
+    {
+      "id": "doc_005",
+      "title": "Docker and Containerization",
+      "content": "Docker containers provide consistent deployment environments across development and production. Docker Compose orchestrates multi-service applications. Best practices include multi-stage builds, image optimization, and proper secret management.",
+      "metadata": {
+        "category": "DevOps",
+        "difficulty": "intermediate"
+      }
+    },
+    {
+      "id": "doc_006",
+      "title": "LangSmith Observability",
+      "content": "LangSmith provides comprehensive observability for LLM applications. Features include request tracing, performance monitoring, debugging workflows, and analytics. Integration with LangChain enables automatic instrumentation and detailed insights into AI system behavior.",
+      "metadata": {
+        "category": "Monitoring",
+        "difficulty": "intermediate"
+      }
+    },
+    {
+      "id": "doc_007",
+      "title": "Next.js and React Development",
+      "content": "Next.js 13+ introduces the App Router with server components, enabling better performance and developer experience. Features include automatic code splitting, image optimization, and built-in CSS support. Tailwind CSS provides utility-first styling for rapid UI development.",
+      "metadata": {
+        "category": "Frontend",
+        "difficulty": "intermediate"
+      }
+    },
+    {
+      "id": "doc_008",
+      "title": "FastAPI Backend Development",
+      "content": "FastAPI is a modern Python web framework for building APIs with automatic documentation. It provides async/await support, type hints validation, and OpenAPI schema generation. Integration with Pydantic ensures data validation and serialization.",
+      "metadata": {
+        "category": "Backend",
+        "difficulty": "intermediate"
+      }
+    }
+  ],
+  "qa_pairs": [
+    {
+      "question": "What are Large Language Models?",
+      "reference_answer": "Large Language Models (LLMs) are neural networks trained on vast amounts of text data. They can understand and generate human-like text across various domains.",
+      "relevant_doc_ids": [
+        "doc_001"
+      ],
+      "difficulty": "beginner",
+      "category": "AI/ML",
+      "evaluation_aspects": [
+        "factual_accuracy",
+        "completeness"
+      ],
+      "id": "qa_001",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "Which models are examples of modern LLMs?",
+      "reference_answer": "Modern LLMs include GPT, BERT, and T5, which have revolutionized natural language processing.",
+      "relevant_doc_ids": [
+        "doc_001"
+      ],
+      "difficulty": "beginner",
+      "category": "AI/ML",
+      "evaluation_aspects": [
+        "factual_accuracy",
+        "specific_knowledge"
+      ],
+      "id": "qa_002",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "What is Retrieval-Augmented Generation?",
+      "reference_answer": "Retrieval-Augmented Generation (RAG) combines information retrieval with text generation. The system first retrieves relevant documents from a knowledge base, then uses this context to generate accurate, grounded responses.",
+      "relevant_doc_ids": [
+        "doc_002"
+      ],
+      "difficulty": "intermediate",
+      "category": "AI/ML",
+      "evaluation_aspects": [
+        "conceptual_understanding",
+        "technical_accuracy"
+      ],
+      "id": "qa_003",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "What are the key components of a RAG system?",
+      "reference_answer": "Key components of a RAG system include document embedding, vector storage, and LLM integration.",
+      "relevant_doc_ids": [
+        "doc_002"
+      ],
+      "difficulty": "intermediate",
+      "category": "AI/ML",
+      "evaluation_aspects": [
+        "completeness",
+        "technical_detail"
+      ],
+      "id": "qa_004",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "What are vector databases used for?",
+      "reference_answer": "Vector databases store high-dimensional embeddings that represent semantic meaning of text.",
+      "relevant_doc_ids": [
+        "doc_003"
+      ],
+      "difficulty": "intermediate",
+      "category": "Infrastructure",
+      "evaluation_aspects": [
+        "technical_accuracy",
+        "clarity"
+      ],
+      "id": "qa_005",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "What are some popular vector database options?",
+      "reference_answer": "Popular vector database options include Pinecone, Weaviate, and pgvector.",
+      "relevant_doc_ids": [
+        "doc_003"
+      ],
+      "difficulty": "intermediate",
+      "category": "Infrastructure",
+      "evaluation_aspects": [
+        "factual_accuracy",
+        "specific_knowledge"
+      ],
+      "id": "qa_006",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "What is Parameter-Efficient Fine-Tuning?",
+      "reference_answer": "Parameter-Efficient Fine-Tuning (PEFT) methods like LoRA and QLoRA allow adaptation of large models with minimal computational resources.",
+      "relevant_doc_ids": [
+        "doc_004"
+      ],
+      "difficulty": "advanced",
+      "category": "AI/ML",
+      "evaluation_aspects": [
+        "technical_accuracy",
+        "conceptual_understanding"
+      ],
+      "id": "qa_007",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "What benefits does the Unsloth framework provide?",
+      "reference_answer": "The Unsloth framework provides 2x faster training and 70% memory reduction for LLM fine-tuning.",
+      "relevant_doc_ids": [
+        "doc_004"
+      ],
+      "difficulty": "advanced",
+      "category": "AI/ML",
+      "evaluation_aspects": [
+        "specific_knowledge",
+        "quantitative_accuracy"
+      ],
+      "id": "qa_008",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "What are the benefits of using Docker containers?",
+      "reference_answer": "Docker containers provide consistent deployment environments across development and production.",
+      "relevant_doc_ids": [
+        "doc_005"
+      ],
+      "difficulty": "intermediate",
+      "category": "DevOps",
+      "evaluation_aspects": [
+        "practical_understanding",
+        "clarity"
+      ],
+      "id": "qa_009",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "What is Docker Compose used for?",
+      "reference_answer": "Docker Compose orchestrates multi-service applications.",
+      "relevant_doc_ids": [
+        "doc_005"
+      ],
+      "difficulty": "intermediate",
+      "category": "DevOps",
+      "evaluation_aspects": [
+        "technical_accuracy",
+        "conciseness"
+      ],
+      "id": "qa_010",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "How do vector databases and embeddings work together in RAG systems?",
+      "reference_answer": "Vector databases store high-dimensional embeddings that represent semantic meaning of text. In RAG systems, these embeddings enable efficient retrieval of relevant documents from the knowledge base, which are then used as context for text generation.",
+      "relevant_doc_ids": [
+        "doc_002",
+        "doc_003"
+      ],
+      "difficulty": "advanced",
+      "category": "AI/ML",
+      "evaluation_aspects": [
+        "synthesis",
+        "cross_document_reasoning",
+        "technical_accuracy"
+      ],
+      "id": "qa_011",
+      "created_at": "2025-07-01T11:42:33.096265"
+    },
+    {
+      "question": "What technologies are needed for a complete RAG implementation?",
+      "reference_answer": "A complete RAG implementation requires vector databases for storing embeddings, LLM frameworks for generation, containerization with Docker for deployment, and observability tools like LangSmith for monitoring. Frontend frameworks like Next.js and backend APIs with FastAPI complete the full-stack solution.",
+      "relevant_doc_ids": [
+        "doc_002",
+        "doc_003",
+        "doc_005",
+        "doc_006",
+        "doc_007",
+        "doc_008"
+      ],
+      "difficulty": "advanced",
+      "category": "AI/ML",
+      "evaluation_aspects": [
+        "comprehensive_understanding",
+        "integration_knowledge",
+        "system_thinking"
+      ],
+      "id": "qa_012",
+      "created_at": "2025-07-01T11:42:33.096265"
+    }
+  ]
+}

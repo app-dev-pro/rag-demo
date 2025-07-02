@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yap Sing Loon - Full-stack AI Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #764ba2;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #764ba2;
+        }
+        
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .availability-badge {
+            background: #4CAF50;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .cta-button {
+            background: linear-gradient(45deg, #FF6B6B, #FF8E8E);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+        
+        .section {
+            padding: 80px 0;
+            background: white;
+            margin: 40px 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-category {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #764ba2;
+        }
+        
+        .skill-category h3 {
+            color: #764ba2;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .skill-tag {
+            background: #764ba2;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border-color: #764ba2;
+        }
+        
+        .project-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+        }
+        
+        .project-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-tag {
+            background: #f0f0f0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .project-link {
+            background: #764ba2;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        
+        .project-link:hover {
+            background: #5a3a8a;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .demo-button {
+            background: #4CAF50;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .demo-button:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+        
+        .demo-output {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            #demo .container > div {
+                margin: 0 1rem;
+            }
+            
+            #demo ul {
+                columns: 1 !important;
+            }
+            
+            .hero div {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .hero .cta-button {
+                display: block;
+                margin: 0.5rem auto;
+                text-align: center;
+                max-width: 200px;
+            }
+        }
+    </style>
+    <script>
+        // GitHub configuration - update these variables as needed
+        const GITHUB_CONFIG = {
+            username: 'app-dev-pro',
+            repository: 'rag-demo',
+            branch: 'main'
+        };
+        
+        // Helper function to generate GitHub URLs
+        function getGitHubUrl(path = '') {
+            const baseUrl = `https://github.com/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repository}`;
+            if (path) {
+                return `${baseUrl}/blob/${GITHUB_CONFIG.branch}/${path}`;
+            }
+            return baseUrl;
+        }
+        
+        // Helper function to generate GitHub Pages URLs
+        function getGitHubPagesUrl(path = '') {
+            const baseUrl = `https://${GITHUB_CONFIG.username}.github.io/${GITHUB_CONFIG.repository}`;
+            if (path) {
+                return `${baseUrl}/${path}`;
+            }
+            return baseUrl;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Yap Sing Loon</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="resume.html" id="nav-resume-link">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Full-stack AI Engineer</h1>
+            <p class="subtitle">Specializing in RAG Systems, Local LLMs, and Production AI Applications</p>
+            <div class="availability-badge">🟢 Available to start immediately</div>
+            <p style="margin: 1.5rem 0; font-size: 1.1rem; opacity: 0.9;">
+                ✨ <strong>Local RAG Demo</strong>: Next.js + FastAPI + Supabase + Ollama<br>
+                🚀 Complete document ingestion & AI-powered Q&A pipeline<br>
+                🔧 Full Docker orchestration with local LLM inference
+            </p>
+            <div>
+                <a href="demo_showcase.html" id="demo-showcase-link" class="cta-button" style="background: #4CAF50;">🎬 Demo Showcase</a>
+                <a href="evaluation_dashboard.html" id="evaluation-dashboard-link" class="cta-button" style="background: #2196F3;">📊 Evaluation Dashboard</a>
+                <a href="llm_finetuning.html" class="cta-button" style="background: #FF9800;">🚀 LLM Fine-tuning Portfolio</a>
+                <a href="#projects" class="cta-button">📁 View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2>Technical Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>🤖 LLM Frameworks & Local Hosting</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">LangChain</span>
+                        <span class="skill-tag">Ollama (Local LLMs)</span>
+                        <span class="skill-tag">Local Model Deployment</span>
+                        <span class="skill-tag">FastEmbed</span>
+                        <span class="skill-tag">Model Optimization</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🗄️ Vector Databases</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Supabase + pgvector</span>
+                        <span class="skill-tag">Embedding Strategies</span>
+                        <span class="skill-tag">Vector Search</span>
+                        <span class="skill-tag">Document Chunking</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>⚛️ React Frameworks</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Next.js 13+ (App Router)</span>
+                        <span class="skill-tag">React 18+</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Server Components</span>
+                        <span class="skill-tag">Tailwind CSS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🐳 Containerization</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">docker-compose</span>
+                        <span class="skill-tag">Multi-stage Builds</span>
+                        <span class="skill-tag">Container Orchestration</span>
+                        <span class="skill-tag">Production Deployments</span>
+                        <span class="skill-tag">Image Optimization</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3> Observability & Evaluation</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">LangSmith</span>
+                        <span class="skill-tag">Agentic Evaluation</span>
+                        <span class="skill-tag">RAG Metrics</span>
+                        <span class="skill-tag">Custom Dashboards</span>
+                        <span class="skill-tag">Structured Logging</span>
+                        <span class="skill-tag">Performance Testing</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🚀 LLM Fine-tuning & PEFT</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Parameter-Efficient Fine-Tuning</span>
+                        <span class="skill-tag">Unsloth Framework</span>
+                        <span class="skill-tag">LoRA/QLoRA</span>
+                        <span class="skill-tag">DPO/ORPO</span>
+                        <span class="skill-tag">Model Selection</span>
+                        <span class="skill-tag">Hyperparameter Tuning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="section" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">🔍 RAG Demo - Running Locally</h2>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+                    <h3 style="color: #764ba2; margin-bottom: 1rem;">🚀 Complete RAG Implementation</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                        This demo showcases a production-ready RAG system with modern architecture patterns, 
+                        containerized deployment, and local LLM inference. Perfect example of full-stack AI engineering.
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+                        <div style="border: 1px solid #e9ecef; border-radius: 8px; padding: 1rem;">
+                            <h4 style="color: #495057; margin-bottom: 0.5rem;">⚛️ Frontend</h4>
+                            <p style="font-size: 0.9rem; color: #6c757d;">Next.js 13+ with App Router, Tailwind CSS, modern React patterns, drag-and-drop file upload</p>
+                        </div>
+                        <div style="border: 1px solid #e9ecef; border-radius: 8px; padding: 1rem;">
+                            <h4 style="color: #495057; margin-bottom: 0.5rem;">🔧 Backend</h4>
+                            <p style="font-size: 0.9rem; color: #6c757d;">FastAPI with async endpoints, LangChain integration, document processing pipeline</p>
+                        </div>
+                        <div style="border: 1px solid #e9ecef; border-radius: 8px; padding: 1rem;">
+                            <h4 style="color: #495057; margin-bottom: 0.5rem;">🗄️ Vector DB</h4>
+                            <p style="font-size: 0.9rem; color: #6c757d;">Supabase with pgvector for high-performance vector storage, document embeddings</p>
+                        </div>
+                        <div style="border: 1px solid #e9ecef; border-radius: 8px; padding: 1rem;">
+                            <h4 style="color: #495057; margin-bottom: 0.5rem;">🤖 Local LLM</h4>
+                            <p style="font-size: 0.9rem; color: #6c757d;">Ollama hosting Llama 3.2:1b, completely local inference, no API dependencies</p>
+                        </div>
+                    </div>
+                                        
+                    <!-- RAG Evaluation System Section -->
+                    <div style="background: #e8f5e8; border-radius: 12px; padding: 2rem; margin: 2rem 0; border-left: 4px solid #28a745;">
+                        <h4 style="color: #28a745; margin-bottom: 1rem; display: flex; align-items: center;">
+                            📊 <span style="margin-left: 0.5rem;">End-to-End RAG Pipeline Evaluation</span>
+                        </h4>
+                        <p style="margin-bottom: 1.5rem; color: #495057;">
+                            <strong>Enterprise-level evaluation framework</strong> demonstrating production-ready AI system testing practices for professional portfolio review.
+                        </p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                            <div style="background: white; border-radius: 8px; padding: 1rem; border: 1px solid #28a745;">
+                                <h5 style="color: #28a745; margin-bottom: 0.5rem;">🎯 Quality Metrics</h5>
+                                <p style="font-size: 0.9rem; color: #6c757d;">ROUGE scores, BERTScore, faithfulness, answer relevance</p>
+                            </div>
+                            <div style="background: white; border-radius: 8px; padding: 1rem; border: 1px solid #28a745;">
+                                <h5 style="color: #28a745; margin-bottom: 0.5rem;">⚡ Performance Testing</h5>
+                                <p style="font-size: 0.9rem; color: #6c757d;">Response time, throughput, memory usage analysis</p>
+                            </div>
+                            <div style="background: white; border-radius: 8px; padding: 1rem; border: 1px solid #28a745;">
+                                <h5 style="color: #28a745; margin-bottom: 0.5rem;">📈 Business Metrics</h5>
+                                <p style="font-size: 0.9rem; color: #6c757d;">Accuracy, hallucination rate, user satisfaction</p>
+                            </div>
+                            <div style="background: white; border-radius: 8px; padding: 1rem; border: 1px solid #28a745;">
+                                <h5 style="color: #28a745; margin-bottom: 0.5rem;">🔍 Systematic Testing</h5>
+                                <p style="font-size: 0.9rem; color: #6c757d;">Automated test suite, edge cases, ground truth validation</p>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 1.5rem;">
+                            <a href="evaluation_dashboard.html" id="evaluation-dashboard-link" target="_blank" 
+                               style="background: #28a745; color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; margin: 0.5rem;">
+                                📊 View Evaluation Dashboard
+                            </a>
+                            <div style="font-size: 0.8rem; color: #6c757d; margin-top: 0.5rem;">
+                                Interactive dashboard showing comprehensive RAG pipeline metrics
+                            </div>
+                        </div>
+                        
+                        <div style="background: white; border-radius: 6px; padding: 1rem; margin-top: 1rem; border: 1px dashed #28a745;">
+                            <strong style="color: #28a745;">🎯 What This Demonstrates for Portfolio Review:</strong>
+                            <ul style="margin: 0.5rem 0 0 1.5rem; color: #495057; font-size: 0.9rem;">
+                                <li>Enterprise-level AI system evaluation practices</li>
+                                <li>Production-ready testing and monitoring capabilities</li>
+                                <li>LLM observability with industry-standard tools (LangSmith)</li>
+                                <li>Systematic approach to quality assurance</li>
+                                <li>Data-driven performance optimization mindset</li>
+                                <li>Comprehensive understanding of RAG system components</li>
+                                <li>Agentic workflow orchestration and multi-agent coordination</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- LLM Observability Status Section -->
+                    <div style="background: #e3f2fd; border-radius: 12px; padding: 2rem; margin: 2rem 0; border-left: 4px solid #2196f3;">
+                        <h4 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center;">
+                            🔍 <span style="margin-left: 0.5rem;">LLM Observability & Monitoring</span>
+                        </h4>
+                        <p style="margin-bottom: 1.5rem; color: #495057;">
+                            <strong>Observability framework</strong> with LangSmith integration for comprehensive LLM monitoring, tracing, and analytics.
+                        </p>
+                        
+                        <!-- Real-time Status Check -->
+  
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                            <div style="background: white; border-radius: 8px; padding: 1rem; border: 1px solid #2196f3;">
+                                <h5 style="color: #1976d2; margin-bottom: 0.5rem;">📊 LangSmith Integration</h5>
+                                <p style="font-size: 0.9rem; color: #6c757d;">Request tracing, performance monitoring, debugging workflows</p>
+                            </div>
+                            <div style="background: white; border-radius: 8px; padding: 1rem; border: 1px solid #2196f3;">
+                                <h5 style="color: #1976d2; margin-bottom: 0.5rem;">� Structured Logging</h5>
+                                <p style="font-size: 0.9rem; color: #6c757d;">JSON logs, error tracking, correlation IDs, audit trails</p>
+                            </div>
+                            <div style="background: white; border-radius: 8px; padding: 1rem; border: 1px solid #2196f3;">
+                                <h5 style="color: #1976d2; margin-bottom: 0.5rem;">⚡ Performance Metrics</h5>
+                                <p style="font-size: 0.9rem; color: #6c757d;">Response times, token usage, memory consumption, throughput</p>
+                            </div>
+                            <div style="background: white; border-radius: 8px; padding: 1rem; border: 1px solid #2196f3;">
+                                <h5 style="color: #1976d2; margin-bottom: 0.5rem;">📈 Production Ready</h5>
+                                <p style="font-size: 0.9rem; color: #6c757d;">Enterprise monitoring, alerting, distributed tracing</p>
+                            </div>
+                        </div>
+                        
+                        <div style="background: white; border-radius: 6px; padding: 1rem; margin-top: 1rem; border: 1px dashed #2196f3;">
+                            <strong style="color: #1976d2;">🏢 Enterprise Observability Features:</strong>
+                            <ul style="margin: 0.5rem 0 0 1.5rem; color: #495057; font-size: 0.9rem;">
+                                <li>Distributed tracing across microservices architecture</li>
+                                <li>Real-time monitoring and structured logging</li>
+                                <li>LangSmith integration for request tracing</li>
+                                <li>Performance metrics and error tracking</li>
+                                <li>Custom metrics and dashboard integration</li>
+                                <li>Production-ready observability patterns</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0;">
+                        <h4 style="color: #495057; margin-bottom: 1rem;">🔗 Architecture Highlights</h4>
+                        <ul style="columns: 2; column-gap: 2rem; margin: 0; padding-left: 1.5rem;">
+                            <li>Multi-format document support (.txt, .md, .doc, .docx)</li>
+                            <li>Real-time vector embedding pipeline</li>
+                            <li>LLM observability with LangSmith</li>
+                            <li>Structured logging and performance monitoring</li>
+                            <li>Containerized microservices architecture</li>
+                            <li>Health checks and service orchestration</li>
+                            <li>Persistent data volumes</li>
+                            <li>Production-ready Docker setup</li>
+                            <li>Agentic evaluation framework</li>
+                            <li>Enterprise-grade trace tracking</li>
+                            <li>Real-time metrics and alerting</li>
+                        </ul>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <a href="demo_showcase.html" id="demo-showcase-main-link" style="background: #4CAF50; color: white; padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: bold; margin: 0.5rem; display: inline-block; transition: all 0.3s;">
+                            🎬 View Demo Showcase
+                        </a>
+                        <a href="https://github.com/app-dev-pro/rag-demo/blob/main/OBSERVABILITY_QUICKSTART.md" id="observability-guide-link" target="_blank" background: #FF9800; color: white; padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: bold; margin: 0.5rem; display: inline-block; transition: all 0.3s;">
+                            🔍 Observability Guide
+                        </a>
+                        <a href="https://github.com/app-dev-pro/rag-demo/blob/main/run_rag_evaluation.py" id="source-code-link" target="_blank" background: #764ba2; color: white; padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: bold; margin: 0.5rem; display: inline-block; transition: all 0.3s;">
+                            📁 Python Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>🔍 Local RAG Demo Platform</h3>
+                        <p>Complete RAG implementation with file upload, vectorization & local LLM inference</p>
+                    </div>
+                    <div class="project-content">
+                        <p><strong>Full-stack RAG application</strong> demonstrating document ingestion, vector search, and AI-powered Q&A with completely local infrastructure. Features drag-and-drop file upload, real-time processing feedback, and seamless Docker orchestration.</p>
+                        
+                        <h4 style="margin: 1rem 0 0.5rem 0; color: #764ba2;">🎯 Key Features:</h4>
+                        <ul style="margin: 0.5rem 0; padding-left: 1.5rem; line-height: 1.4;">
+                            <li>Multi-format document ingestion (.txt, .md, .doc, .docx)</li>
+                            <li>Real-time vector embedding with FastEmbed</li>
+                            <li>Local LLM inference (Ollama + Llama 3.2:1b)</li>
+                            <li>Modern React UI with Tailwind CSS</li>
+                            <li>Complete Docker Compose orchestration</li>
+                            <li>LangSmith observability integration</li>
+                        </ul>
+
+                        <div class="project-tech">
+                            <span class="tech-tag">Next.js 13+</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">Supabase + pgvector</span>
+                            <span class="tech-tag">Ollama (Local LLM)</span>
+                            <span class="tech-tag">LangChain</span>
+                            <span class="tech-tag">FastEmbed</span>
+                            <span class="tech-tag">Docker Compose</span>
+                            <span class="tech-tag">LangSmith</span>
+                        </div>
+                        <div class="project-links">
+                            <!-- Note: These href values will be dynamically updated by JavaScript on page load -->
+                            <a href="https://github.com/app-dev-pro/rag-demo/blob/main/demo_showcase.html" class="project-link">RAG Showcase</a>
+                            <a href="https://github.com/app-dev-pro/rag-demo/blob/main/README.md" target="_blank" class="project-link">Documentation</a>
+                            <a href="https://github.com/app-dev-pro/rag-demo" target="_blank" class="project-link">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>📊 RAG Evaluation Framework</h3>
+                        <p>Production-ready evaluation system with agentic workflow capabilities</p>
+                    </div>
+                    <div class="project-content">
+                        <p><strong>Comprehensive evaluation framework</strong> demonstrating enterprise-level AI system testing practices. Features automated evaluation agents, multi-metric assessment, and intelligent workflow orchestration for continuous quality monitoring.</p>
+                        
+                        <h4 style="margin: 1rem 0 0.5rem 0; color: #764ba2;">� Evaluation Capabilities:</h4>
+                        <ul style="margin: 0.5rem 0; padding-left: 1.5rem; line-height: 1.4;">
+                            <li>Quality metrics: ROUGE, BERTScore, faithfulness</li>
+                            <li>Performance testing: response time, throughput</li>
+                            <li>Agentic evaluation: autonomous quality assessment</li>
+                            <li>Multi-agent orchestration and coordination</li>
+                            <li>Interactive evaluation dashboard</li>
+                        </ul>
+
+                        <div class="project-tech">
+                            <span class="tech-tag">LangSmith</span>
+                            <span class="tech-tag">Structured Evaluation</span>
+                            <span class="tech-tag">Agentic Workflows</span>
+                            <span class="tech-tag">Performance Testing</span>
+                            <span class="tech-tag">Quality Metrics</span>
+                            <span class="tech-tag">Dashboard</span>
+                            <span class="tech-tag">Automated Testing</span>
+                        </div>
+                        <div class="project-links">
+                            <!-- Note: These href values will be dynamically updated by JavaScript on page load -->
+                            <a href="https://github.com/app-dev-pro/rag-demo/blob/main/evaluation_dashboard.html" class="project-link">Evaluation Showcase</a>
+                            <a href="https://github.com/app-dev-pro/rag-demo/blob/main/EVALUATION_README.md" target="_blank" class="project-link">Documentation</a>
+                            <a href="https://github.com/app-dev-pro/rag-demo/blob/main/run_rag_evaluation.py" target="_blank" class="project-link">Python Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>🚀 LLM Fine-tuning Portfolio</h3>
+                        <p>Parameter-Efficient Fine-Tuning (PEFT) expertise with Unsloth framework</p>
+                    </div>
+                    <div class="project-content">
+                        <p><strong>Comprehensive portfolio showcasing LLM fine-tuning capabilities</strong> using Parameter-Efficient Fine-Tuning (PEFT) techniques. Demonstrates expertise in LoRA, QLoRA, DPO, and ORPO methodologies with the Unsloth framework for accelerated training and reduced memory usage.</p>
+                        
+                        <h4 style="margin: 1rem 0 0.5rem 0; color: #764ba2;">🎯 Core Competencies:</h4>
+                        <ul style="margin: 0.5rem 0; padding-left: 1.5rem; line-height: 1.4;">
+                            <li>Parameter-Efficient Fine-Tuning (PEFT) methodologies</li>
+                            <li>Unsloth framework mastery for 2x speed, 70% memory reduction</li>
+                            <li>Strategic model selection and optimization</li>
+                            <li>LoRA/QLoRA configuration and hyperparameter tuning</li>
+                            <li>Resource-constrained fine-tuning on consumer GPUs</li>
+                            <li>Domain-specific LLM adaptation strategies</li>
+                        </ul>
+
+                        <div class="project-tech">
+                            <span class="tech-tag">Unsloth AI</span>
+                            <span class="tech-tag">LoRA</span>
+                            <span class="tech-tag">QLoRA</span>
+                            <span class="tech-tag">DPO</span>
+                            <span class="tech-tag">ORPO</span>
+                            <span class="tech-tag">Llama 3.1</span>
+                            <span class="tech-tag">Mistral</span>
+                            <span class="tech-tag">PEFT</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="llm_finetuning.html" class="project-link">View Portfolio</a>
+                            <a href="llm_finetuning.html#references" class="project-link">References</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section section">
+        <div class="container">
+            <!-- <h2>Let's Build Something Amazing Together</h2> -->
+            <p style="font-size: 1.2rem; margin-bottom: 3rem;">Available to start immediately</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:paceair@gmail.com">paceair@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <a href="tel:+6584840779">+65 8484 0779</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Yap Sing Loon. Built with passion for AI and modern web technologies.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDemo(demoId) {
+            const demo = document.getElementById(demoId);
+            if (demo.style.display === 'none' || demo.style.display === '') {
+                demo.style.display = 'block';
+                // Simulate typing effect
+                const content = demo.innerHTML;
+                demo.innerHTML = '';
+                let i = 0;
+                const typeWriter = () => {
+                    if (i < content.length) {
+                        demo.innerHTML += content.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 20);
+                    }
+                };
+                typeWriter();
+            } else {
+                demo.style.display = 'none';
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animation
+        document.querySelectorAll('.section, .project-card, .skill-category').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add dynamic typing effect to hero subtitle
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect on page load
+        window.addEventListener('load', () => {
+            const subtitle = document.querySelector('.hero .subtitle');
+            const originalText = subtitle.textContent;
+            typeWriter(subtitle, originalText, 50);
+        });
+
+        // Initialize dynamic links
+        function initializeDynamicLinks() {
+            // Update all elements with specific IDs to use dynamic URLs
+            const linkMappings = {
+                'demo-showcase-link': getGitHubPagesUrl('demo_showcase.html'),
+                'resume-link': getGitHubPagesUrl('resume.html'),
+                'nav-resume-link': getGitHubPagesUrl('resume.html'),
+                'demo-showcase-main-link': getGitHubPagesUrl('demo_showcase.html'),
+                'evaluation-dashboard-link': getGitHubPagesUrl('evaluation_dashboard.html'),
+                'observability-guide-link': getGitHubUrl('OBSERVABILITY_QUICKSTART.md'),
+                'source-code-link': getGitHubUrl()
+            };
+            
+            // Set href attributes for elements with IDs
+            Object.entries(linkMappings).forEach(([id, url]) => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.href = url;
+                }
+            });
+            
+            // Update hardcoded GitHub links in project cards
+            const projectLinks = document.querySelectorAll('.project-link');
+            projectLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.includes('github.com/app-dev-pro/rag-demo')) {
+                    // Extract the path after the repository name
+                    const match = href.match(/github\.com\/app-dev-pro\/rag-demo(?:\/blob\/main)?\/(.+)/);
+                    if (match) {
+                        const path = match[1];
+                        // For HTML files that should be served via GitHub Pages
+                        if (path.endsWith('.html')) {
+                            link.href = getGitHubPagesUrl(path);
+                        } else {
+                            // For source files, documentation, etc.
+                            link.href = getGitHubUrl(path);
+                        }
+                    } else if (href.endsWith('/rag-demo')) {
+                        // Just the repository root
+                        link.href = getGitHubUrl();
+                    }
+                }
+            });
+            
+            // Update code block URLs in the quick start section
+            const cloneUrlElement = document.getElementById('clone-url');
+            const demoShowcaseUrlElement = document.getElementById('demo-showcase-url');
+            
+            if (cloneUrlElement) {
+                cloneUrlElement.textContent = getGitHubUrl();
+            }
+            
+            if (demoShowcaseUrlElement) {
+                demoShowcaseUrlElement.textContent = getGitHubPagesUrl('demo_showcase.html');
+            }
+        }
+
+        // Auto-check backend status on page load
+        window.addEventListener('load', () => {
+            const subtitle = document.querySelector('.hero .subtitle');
+            const originalText = subtitle.textContent;
+            typeWriter(subtitle, originalText, 50);
+            
+            // Initialize dynamic links
+            initializeDynamicLinks();
+            
+            // Check backend status if on localhost
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                setTimeout(checkBackendStatus, 2000);
+            }
+        });
+
+        function simulateRAGQuery() {
+            const queryInput = document.getElementById('query-input');
+            const outputDiv = document.getElementById('output');
+            const query = queryInput.value.trim();
+            
+            if (!query) {
+                alert('Please enter a query to simulate');
+                return;
+            }
+            
+            // Show loading state
+            outputDiv.innerHTML = '<div style="color: #007bff; text-align: center; padding: 2rem;"><strong>🔄 Processing your query...</strong><br><small style="color: #6c757d;">Simulating RAG pipeline workflow</small></div>';
+            
+            // Simulate processing delay
+            setTimeout(() => {
+                const simulatedResponse = generateSimulatedResponse(query);
+                displaySimulatedResult(simulatedResponse, query);
+            }, 2000);
+        }
+
+        async function checkBackendStatus() {
+            const statusIndicator = document.getElementById('status-indicator');
+            const statusDetails = document.getElementById('status-details');
+            
+            // Show loading state
+            statusIndicator.innerHTML = '🔄 Checking backend status...';
+            statusIndicator.style.color = '#2196f3';
+            statusDetails.style.display = 'none';
+            
+            try {
+                const response = await fetch('http://localhost:8000/status');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const status = await response.json();
+                
+                // Update status indicator
+                statusIndicator.innerHTML = '✅ Backend online and operational';
+                statusIndicator.style.color = '#28a745';
+                
+                // Show detailed status
+                statusDetails.innerHTML = `
+                    <h6 style="color: #1976d2; margin-bottom: 1rem;">Backend Service Status</h6>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div style="padding: 0.75rem; border-radius: 6px; ${status.database ? 'background: #d4edda; color: #155724;' : 'background: #f8d7da; color: #721c24;'}">
+                            <strong>${status.database ? '✅' : '❌'} Database</strong><br>
+                            <small>${status.database ? 'Connected to Supabase' : 'Connection failed'}</small>
+                        </div>
+                        <div style="padding: 0.75rem; border-radius: 6px; ${status.llm ? 'background: #d4edda; color: #155724;' : 'background: #f8d7da; color: #721c24;'}">
+                            <strong>${status.llm ? '✅' : '❌'} LLM (Ollama)</strong><br>
+                            <small>${status.llm ? 'Model: llama3.2:1b' : 'Model unavailable'}</small>
+                        </div>
+                        <div style="padding: 0.75rem; border-radius: 6px; ${status.observability?.langsmith ? 'background: #d4edda; color: #155724;' : 'background: #fff3cd; color: #856404;'}">
+                            <strong>${status.observability?.langsmith ? '✅' : '⚠️'} LangSmith</strong><br>
+                            <small>${status.observability?.langsmith ? 'Tracing enabled' : 'API key needed'}</small>
+                        </div>
+                    </div>
+                    ${!status.observability?.langsmith ? `
+                    <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 6px; padding: 1rem; margin-top: 1rem;">
+                        <strong style="color: #856404;">🔧 Setup Observability</strong>
+                        <p style="margin: 0.5rem 0; color: #856404; font-size: 0.9rem;">
+                            To enable full observability features, add your API key to <code>.env</code>:
+                        </p>
+                        <pre style="background: #f8f9fa; padding: 0.5rem; border-radius: 4px; font-size: 0.8rem; color: #495057; margin: 0.5rem 0;">LANGCHAIN_API_KEY=your_langsmith_key</pre>
+                        <p style="margin: 0.5rem 0 0 0; color: #856404; font-size: 0.8rem;">
+                            See <code>OBSERVABILITY_QUICKSTART.md</code> for setup instructions.
+                        </p>
+                    </div>
+                    ` : ''}
+                `;
+                statusDetails.style.display = 'block';
+                
+            } catch (error) {
+                // Handle connection errors
+                statusIndicator.innerHTML = '❌ Backend offline or unreachable';
+                statusIndicator.style.color = '#dc3545';
+                
+                statusDetails.innerHTML = `
+                    <div style="background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 6px; padding: 1rem; color: #721c24;">
+                        <strong>🚫 Connection Error</strong>
+                        <p style="margin: 0.5rem 0; font-size: 0.9rem;">
+                            Could not connect to backend at <code>http://localhost:8000</code>
+                        </p>
+                        <p style="margin: 0.5rem 0 0 0; font-size: 0.8rem;">
+                            <strong>To start the backend:</strong><br>
+                            1. Run <code>docker-compose up -d</code><br>
+                            2. Wait for services to initialize<br>
+                            3. Check <code>docker-compose logs backend</code> for errors
+                        </p>
+                    </div>
+                `;
+                statusDetails.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
